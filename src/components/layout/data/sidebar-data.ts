@@ -1,29 +1,16 @@
-import {
-  Construction,
-  LayoutDashboard,
-  Monitor,
-  Bug,
-  ListTodo,
-  FileX,
-  HelpCircle,
-  Lock,
-  Bell,
-  Package,
-  Palette,
-  ServerOff,
-  Settings,
-  Wrench,
-  UserCog,
-  UserX,
-  Users,
-  MessagesSquare,
-  ShieldCheck,
-  AudioWaveform,
-  Command,
-  GalleryVerticalEnd,
-} from 'lucide-react'
-import { ClerkLogo } from '@/assets/clerk-logo'
-import { type SidebarData } from '../types'
+import { Construction, LayoutDashboard, Monitor, Bug, ListTodo, FileX, HelpCircle, Lock, Bell, Package, Palette, ServerOff, Settings, Wrench, UserCog, UserX, Users, MessagesSquare, ShieldCheck, AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react';
+import { ClerkLogo } from '@/assets/clerk-logo';
+import { type SidebarData } from '../types';
+
+
+
+
+
+
+
+
+
+
 
 export const sidebarData: SidebarData = {
   user: {
@@ -52,6 +39,24 @@ export const sidebarData: SidebarData = {
     {
       title: 'General',
       items: [
+        {
+          title: 'Quản lý đơn hàng',
+          icon: ClerkLogo,
+          items: [
+            {
+              title: 'Tất cả',
+              url: '/order',
+            },
+            {
+              title: 'Giao Hàng Loạt',
+              url: '/products',
+            },
+            {
+              title: 'Bàn Giao Đơn Hàng',
+              url: '/products',
+            },
+          ],
+        },
         {
           title: 'Dashboard',
           url: '/',
