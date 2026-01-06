@@ -1,16 +1,30 @@
-import { Construction, LayoutDashboard, Monitor, Bug, ListTodo, FileX, HelpCircle, Lock, Bell, Package, Palette, ServerOff, Settings, Wrench, UserCog, UserX, Users, MessagesSquare, ShieldCheck, AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react';
-import { ClerkLogo } from '@/assets/clerk-logo';
-import { type SidebarData } from '../types';
-
-
-
-
-
-
-
-
-
-
+import {
+  Construction,
+  LayoutDashboard,
+  Monitor,
+  Bug,
+  ListTodo,
+  FileX,
+  HelpCircle,
+  Lock,
+  Bell,
+  Package,
+  Palette,
+  ServerOff,
+  Settings,
+  Wrench,
+  UserCog,
+  UserX,
+  Users,
+  MessagesSquare,
+  ShieldCheck,
+  AudioWaveform,
+  Command,
+  GalleryVerticalEnd,
+} from 'lucide-react'
+import { ClerkLogo } from '@/assets/clerk-logo'
+import { OrderIcon } from '@/components/icons/lucide-clipboard-list.tsx'
+import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
   user: {
@@ -41,7 +55,7 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: 'Quản lý đơn hàng',
-          icon: ClerkLogo,
+          icon: OrderIcon,
           items: [
             {
               title: 'Tất cả',

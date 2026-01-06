@@ -1,7 +1,6 @@
-import { FileOutput, Printer, RotateCcw } from 'lucide-react';
-import { Badge } from '@/components/ui/badge.tsx';
-import { Button } from '@/components/ui/button.tsx';
-import { Input } from '@/components/ui/input.tsx';
+import { FileOutput, Printer, RotateCcw } from 'lucide-react'
+import { Button } from '@/components/ui/button.tsx'
+import { Input } from '@/components/ui/input.tsx'
 import {
   Select,
   SelectContent,
@@ -14,30 +13,30 @@ export function ToShip() {
   return (
     <div className='space-y-4'>
       <div className='flex items-center gap-4'>
-        <span className='w-32 text-gray-500'>Loại Đơn hàng</span>
+        <span className='w-34 text-gray-500'>Loại Đơn hàng</span>
         <div className='flex gap-2'>
-          <Badge
+          <Button
             variant='outline'
-            className='cursor-pointer rounded-full border-orange-500 bg-orange-50 px-4 py-1 font-normal text-orange-600'
+            className='h-8 cursor-pointer rounded-full border-orange-500 bg-orange-50 px-4 font-normal text-orange-600'
           >
             Đơn thường (0)
-          </Badge>
-          <Badge
+          </Button>
+          <Button
             variant='outline'
-            className='cursor-pointer rounded-full px-4 py-1 font-normal text-gray-600 hover:bg-gray-50'
+            className='h-8 cursor-pointer rounded-full px-4 font-normal text-gray-600 hover:bg-gray-50'
           >
             Đơn Hoả Tốc (0)
-          </Badge>
+          </Button>
         </div>
       </div>
 
       <div className='flex items-center gap-4'>
-        <span className='w-32 text-gray-500'>Trạng thái đơn hàng</span>
+        <span className='w-34 text-gray-500'>Trạng thái đơn hàng</span>
         <div className='flex gap-2'>
           <Button
-            variant='ghost'
+            variant='outline'
             size='sm'
-            className='h-8 rounded-full px-4 font-normal'
+            className='h-8 cursor-pointer rounded-full px-4 font-normal text-gray-600 hover:bg-gray-50'
           >
             Tất cả
           </Button>
@@ -49,9 +48,9 @@ export function ToShip() {
             Chưa xử lý
           </Button>
           <Button
-            variant='ghost'
+            variant='outline'
             size='sm'
-            className='h-8 rounded-full px-4 font-normal'
+            className='h-8 cursor-pointer rounded-full px-4 font-normal text-gray-600 hover:bg-gray-50'
           >
             Đã xử lý
           </Button>
@@ -101,43 +100,43 @@ export function ToShip() {
         </Button>
       </div>
 
-        <div className='mb-4 flex items-center justify-between'>
-          <h2 className='text-lg font-bold'>0 Kiện hàng</h2>
-          <div className='flex gap-2'>
-            <Button variant='outline' size='sm' className='text-xs'>
-              <RotateCcw className='mr-1 h-3 w-3' /> Sắp xếp theo: Hạn gửi hàng
-              (Xa - Gần nhất)
-            </Button>
-            <Button className='size-sm bg-orange-500 text-white hover:bg-orange-600'>
-              <Printer className='mr-2 h-4 w-4' /> Giao Hàng Loạt
-            </Button>
-          </div>
+      <div className='mb-4 flex items-center justify-between'>
+        <h2 className='text-lg font-bold'>0 Kiện hàng</h2>
+        <div className='flex gap-2'>
+          <Button variant='outline' size='sm' className='text-xs'>
+            <RotateCcw className='mr-1 h-3 w-3' /> Sắp xếp theo: Hạn gửi hàng
+            (Xa - Gần nhất)
+          </Button>
+          <Button className='size-sm bg-orange-500 text-white hover:bg-orange-600'>
+            <Printer className='mr-2 h-4 w-4' /> Giao Hàng Loạt
+          </Button>
         </div>
+      </div>
 
-        <table className='w-full border-collapse'>
-          <thead>
-            <tr className='border-y bg-gray-50 text-left text-gray-500'>
-              <th className='p-3 font-normal'>Sản phẩm</th>
-              <th className='p-3 text-center font-normal'>Tổng cộng</th>
-              <th className='p-3 text-center font-normal'>
-                Trạng thái | Đếm ngược (?)
-              </th>
-              <th className='p-3 text-center font-normal'>Đơn vị vận chuyển</th>
-              <th className='p-3 text-center font-normal'>Thao tác</th>
-            </tr>
-          </thead>
-        </table>
+      <table className='w-full border-collapse'>
+        <thead>
+          <tr className='border-y bg-gray-50 text-left text-gray-500'>
+            <th className='p-3 font-normal'>Sản phẩm</th>
+            <th className='p-3 text-center font-normal'>Tổng cộng</th>
+            <th className='p-3 text-center font-normal'>
+              Trạng thái | Đếm ngược (?)
+            </th>
+            <th className='p-3 text-center font-normal'>Đơn vị vận chuyển</th>
+            <th className='p-3 text-center font-normal'>Thao tác</th>
+          </tr>
+        </thead>
+      </table>
 
-        {/* Empty State */}
-        <div className='flex flex-col items-center justify-center py-20 text-gray-400'>
-          <div className='mb-4 flex h-32 w-32 items-center justify-center rounded-full bg-gray-50'>
-            <FileOutput className='h-12 w-12 opacity-20' />
-          </div>
-          <p className='text-sm'>Không tìm thấy đơn hàng</p>
-          <button className='mt-2 flex items-center text-blue-500 hover:underline'>
-            <RotateCcw className='mr-1 h-3 w-3' /> Vui lòng tải lại
-          </button>
+      {/* Empty State */}
+      <div className='flex flex-col items-center justify-center py-20 text-gray-400'>
+        <div className='mb-4 flex h-32 w-32 items-center justify-center rounded-full bg-gray-50'>
+          <FileOutput className='h-12 w-12 opacity-20' />
         </div>
+        <p className='text-sm'>Không tìm thấy đơn hàng</p>
+        <button className='mt-2 flex items-center text-blue-500 hover:underline'>
+          <RotateCcw className='mr-1 h-3 w-3' /> Vui lòng tải lại
+        </button>
+      </div>
     </div>
   )
 }

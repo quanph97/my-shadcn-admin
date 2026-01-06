@@ -1,9 +1,15 @@
-import { ChevronDownIcon } from '@radix-ui/react-icons'
-import { SelectTrigger, SelectValue } from '@radix-ui/react-select'
-import { FileText } from 'lucide-react'
-import { Button } from '@/components/ui/button.tsx'
-import { Input } from '@/components/ui/input.tsx'
-import { Select, SelectContent, SelectItem } from '@/components/ui/select'
+import { useState, type ChangeEvent } from 'react';
+import { FileText } from 'lucide-react';
+import { Button } from '@/components/ui/button.tsx';
+import { Input } from '@/components/ui/input.tsx';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select.tsx';
+
+
+
+
+
+
+
 
 type OrderRow = {
   id: string
@@ -15,13 +21,25 @@ type OrderRow = {
   carrier: string
 }
 
-export function All() {
+export function Completed() {
+  const [searchField, setSearchField] = useState('1') // default Mã đơn hàng
+  const [searchText, setSearchText] = useState('') // input Mã đơn hàng
+  const [carrier, setCarrier] = useState('all') // default Tất cả ĐVVC
+
+  const placeholders: Record<string, string> = {
+    '1': 'Nhập Mã đơn hàng',
+    '2': 'Nhập Tên người mua',
+    '3': 'Nhập Sản phẩm',
+    '4': 'Nhập Mã vận đơn',
+  }
+  const placeholderText = placeholders[searchField] ?? 'Nhập'
+
   const orders: OrderRow[] = [
     {
       id: 'DH001',
       productName: 'Áo sơ mi nam',
       sku: 'SM-001',
-      totalOrders: 3,
+      totalOrders: 5,
       status: 'Đang vận chuyển',
       countdown: '2 ngày',
       carrier: 'GHN',
@@ -47,64 +65,72 @@ export function All() {
   ]
   const totalOrdersSum = orders.reduce((sum, o) => sum + o.totalOrders, 0)
 
+  const handleReset = () => {
+    setSearchField('1')
+    setSearchText('')
+    setCarrier('all')
+  }
+
   return (
-    <div className='min-h-screen bg-white'>
-      {/* Filters Area */}
-      <div className='mb-6 grid grid-cols-12 gap-2'>
-        <div className='col-span-5 flex overflow-hidden rounded-md border'>
-          <Select defaultValue='id'>
-            <SelectTrigger className='flex h-9 w-fit items-center justify-between gap-2 border border-transparent bg-gray-200 p-3 whitespace-nowrap transition-all hover:border-gray-400 hover:bg-gray-300'>
-              <SelectValue />
-              <ChevronDownIcon className='ml-2 h-4 w-4 text-gray-800 dark:text-gray-200' />
+    <div className='space-y-4'>
+      <div className='flex items-center gap-2'>
+        <div className='flex flex-1 rounded-md border'>
+          <Select value={searchField} onValueChange={setSearchField}>
+            <SelectTrigger className='w-40 border-none focus:ring-0'>
+              <SelectValue placeholder='Mã đơn hàng' />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value='id'>Mã đơn hàng</SelectItem>
-              <SelectItem value='buyer_name'>Tên người mua</SelectItem>
-              <SelectItem value='product'>Sản phẩm</SelectItem>
-              <SelectItem value='tracking_number'>Mã vận đơn</SelectItem>
-              <SelectItem value='return_request_id'>
-                Mã yêu cầu trả hàng
-              </SelectItem>
-              <SelectItem value='return_tracking_number'>
-                Mã vận đơn cho yêu cầu trả hàng
-              </SelectItem>
+              <SelectItem value='1'>Mã đơn hàng</SelectItem>
+              <SelectItem value='2'>Tên người mua</SelectItem>
+              <SelectItem value='3'>Sản phẩm</SelectItem>
+              <SelectItem value='4'>Mã vận đơn</SelectItem>
             </SelectContent>
           </Select>
+          <div className='my-2 w-px bg-gray-200'></div>
           <Input
-            placeholder='Nhập Mã đơn hàng'
-            className='h-9 border-none text-xs focus-visible:ring-0'
+            placeholder={placeholderText}
+            className='border-none focus-visible:ring-0'
+            value={searchText}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setSearchText(e.target.value)
+            }
           />
         </div>
 
-        <div className='col-span-5 flex items-center rounded-md border bg-white px-3'>
-          <span className='mr-2 text-xs whitespace-nowrap text-gray-500'>
+        <div className='flex flex-0 items-center rounded-md border px-3'>
+          <span className='mr-2 whitespace-nowrap text-gray-950'>
             Đơn vị vận chuyển
           </span>
-          <Select defaultValue='all'>
-            <SelectTrigger className='h-7 border-none p-0 text-xs focus:ring-0'>
-              <SelectValue />
+          <Select value={carrier} onValueChange={setCarrier}>
+            <SelectTrigger className='border-none focus:ring-0'>
+              <SelectValue placeholder='Tất cả ĐVVC' />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value='all'>Tất cả ĐVVC</SelectItem>
+              <SelectItem value='bulky'>Hàng Cồng Kềnh</SelectItem>
+              <SelectItem value='express'>Hỏa Tốc</SelectItem>
+              <SelectItem value='speed'>Nhanh</SelectItem>
+              <SelectItem value='same_day'>Trong Ngày</SelectItem>
+              <SelectItem value='locker'>Tủ Nhận Hàng</SelectItem>
+              <SelectItem value='others'>Others</SelectItem>
             </SelectContent>
           </Select>
         </div>
 
-        <div className='col-span-2 flex gap-2'>
-          <Button className='h-9 bg-[#ee4d2d] px-6 text-xs font-normal text-white hover:bg-[#d73211]'>
-            Áp dụng
-          </Button>
-          <Button variant='outline' className='h-9 px-6 text-xs font-normal'>
-            Đặt lại
-          </Button>
-        </div>
+        <Button className='border border-orange-500 bg-white px-6 text-orange-500 hover:bg-orange-50'>
+          Áp dụng
+        </Button>
+        <Button
+          variant='outline'
+          className='text-gray-500'
+          onClick={handleReset}
+        >
+          Đặt lại
+        </Button>
       </div>
-
-      {/* Order List Table Header */}
       <div className='mb-4'>
         <h2 className='text-lg font-medium'>{totalOrdersSum} Đơn hàng</h2>
       </div>
-
       <div className='w-full overflow-hidden rounded-sm border'>
         <table className='w-full border-collapse'>
           <thead>
